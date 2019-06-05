@@ -26,6 +26,7 @@ matrix:
     
 before_install:
   - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpenv config-rm xdebug.ini || return 0; fi
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update php-coveralls/php-coveralls:^2.0 ; fi
 
 install:
   - travis_retry composer install --no-interaction --ignore-platform-reqs
@@ -36,6 +37,6 @@ script:
   - if [[ $CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs ; fi
 
 after_success:
-  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update php-coveralls/php-coveralls:^2.0 ; fi
+
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then mkdir -p build/logs ; fi
   - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; travis_retry php vendor/bin/php-coveralls -v --coverage_clover=clover.xml ; fi
