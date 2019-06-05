@@ -17,7 +17,7 @@ class PDOConnectionTest extends TestCase
     public function setUp()
     {
         $config = [
-            'dsn' => 'mysql:dbname=test;host=127.0.0.1;charset=utf8;',
+            'dsn' => 'mysql:host=127.0.0.1;charset=utf8;',
             'username' => 'root',
             'password' => '',
             'options' => [],
