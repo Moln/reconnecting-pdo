@@ -1,0 +1,6 @@
+/vendor/
+/tmp/
+/phpunit-xdebug
+/clover.xml
+composer.lock
+/.idea

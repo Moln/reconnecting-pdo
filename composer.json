@@ -1,0 +1,32 @@
+{
+    "name": "moln/reconnecting-pdo",
+    "description": "Description of project reconnecting-pdo.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Moln Xie",
+            "email": "moln.xie@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "ext-pdo": "*",
+        "psr/log": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moln\\ReconnectingPDO\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Moln\\ReconnectingPDO\\Test\\": "test/"
+        }
+    },
+    "require-dev": {
+        "ext-pdo_sqlite": "*",
+        "ext-xml": "*",
+        "phpunit/phpunit": "^7.2",
+        "squizlabs/php_codesniffer": "^3.2"
+    }
+}

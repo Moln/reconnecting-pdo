@@ -1,0 +1,39 @@
+sudo: false
+
+language: php
+
+services: mysql
+
+env:
+  global:
+    - COMPOSER_ARGS_NO_INTERACTION=""
+    - COMPOSER_ARGS_IGNORE_PLATFORM=""
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+      env:
+        - EXECUTE_TEST_COVERALLS=true
+        - CS_CHECK=true
+    - php: 7.2
+    - php: 7.3
+    
+before_install:
+  - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpenv config-rm xdebug.ini || return 0; fi
+
+install:
+  - travis_retry composer install --no-interaction --ignore-platform-reqs
+ 
+script:
+  - ./vendor/bin/phpunit
+  - if [[ $CS_CHECK == 'true' ]]; then ./vendor/bin/phpcs ; fi
+
+after_success:
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update php-coveralls/php-coveralls:^2.0 ; fi
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; travis_retry php vendor/bin/php-coveralls -v ; fi
